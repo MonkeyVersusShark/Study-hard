@@ -1,6 +1,8 @@
 #ifndef __HEAPSORT_H__
 #define __HEAPSORT_H__
 
+#include "global.h"
+
 /**
  * Class	                     Sorting algorithm
  * Data structure	             Array
@@ -9,12 +11,6 @@
  * Average case performance	     O(n log n)
  * Worst case space complexity	 O(1) auxiliary
  */
-
-void swap(int *n1, int *n2) {
-    *n1 ^= *n2;
-    *n2 ^= *n1;
-    *n1 ^= *n2;
- }
 
 static int left(int i) {
     return i << 1;
