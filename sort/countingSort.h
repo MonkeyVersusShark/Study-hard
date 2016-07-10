@@ -16,7 +16,7 @@ void countingSort(int *arr, int len, int k) {
         cnt[i] += cnt[i - 1];
 
     for (int i = len - 1; i >= 0; i--) {
-        tmp[cnt[arr[i]]] = arr[i];
+        tmp[cnt[arr[i]] - 1] = arr[i];
         --cnt[arr[i]];
     }
 
@@ -38,10 +38,10 @@ void countingSort(int *arrA, int *arrB, int len, int k) {
         cnt[i] += cnt[i - 1];
 
     for (int i = len - 1; i >= 0; i--) {
-        arrB[cnt[arrA[i]]] = arrA[i];
+        arrB[cnt[arrA[i]] - 1] = arrA[i];
         --cnt[arrA[i]];
     }
-    
+
     delete[] cnt;
 }
 
