@@ -107,13 +107,13 @@ public:
         ++HashSize;
     }
 
-    bool HashDelete(string key) {
-        int h = hash(key);
+    bool HashDelete(const Info &x) {
+        int h = hash(x.name);
         InfoPtr cur = table[h];
         cur = cur->next;
 
         while (cur != NULL) {
-            if (cur->name == key) {
+            if (cur->name == x.name) {
                 if (cur->next == NULL) {
                     cur->prev->next = cur->next;
                     delete cur;
