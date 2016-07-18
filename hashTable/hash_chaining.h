@@ -4,6 +4,7 @@
 #include <vector>
 #include <list>
 #include <cmath>
+#include <cstddef>
 using namespace std;
 
 class hashTable {
@@ -48,13 +49,15 @@ public:
         return false;
     }
 
-    bool search(int key) {
+    element *search(int key) {
         int hashKey = hash(key);
         for (auto iter = ele[hashKey].begin();
         iter != ele[hashKey].end(); ++iter)
-            if (iter->key == key)
-                return true;
-        return false;
+            if (iter->key == key) {
+                element *retNode = new element(iter->data, iter->key);
+                return retNode;
+            }
+        return NULL;
     }
 };
 
