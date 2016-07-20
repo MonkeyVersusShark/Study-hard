@@ -54,6 +54,29 @@ private:
 public:
     BStree() : root(NULL) { }
 
+    ~BStree() {
+        if (root != NULL) {
+            node *curr = NULL;
+            node *pre = NULL;
+            stack<node *> s;
+            s.push(root);
+            while (!s.empty()) {
+                curr = s.top();
+                if ((curr->left == NULL && curr->right == NULL) ||
+                (pre != NULL && (pre == curr->left || pre == curr->right))) {
+                    delete curr;
+                    s.pop();
+                    pre = curr;
+                } else {
+                    if (curr->right != NULL)
+                        s.push(curr->right);
+                    if (curr->left != NULL)
+                        s.push(curr->left);
+                }
+            }
+        }
+    }
+
     // With recursion
     static void inorder_tree_walk(node *r) {
         if (r != NULL) {
