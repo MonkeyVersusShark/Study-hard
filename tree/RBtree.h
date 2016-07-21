@@ -27,6 +27,35 @@ private:
     node *root;
     node *nil;
 
+public:
+    RBtree() {
+        nil = new node();
+        root = nil;
+    }
+
+    ~RBtree() {
+        if (root != nil) {
+            node *curr = nil;
+            node *pre = nil;
+            stack<node *> s;
+            s.push(root);
+            while (!s.empty()) {
+                curr = s.top();
+                if ((curr->left == nil && curr->right == nil) ||
+                (pre != nil && (pre == curr->left || pre == curr->right))) {
+                    delete curr;
+                    s.pop();
+                    pre = curr;
+                } else {
+                    if (curr->right != nil)
+                        s.push(curr->right);
+                    if (curr->left != nil)
+                        s.push(curr->left);
+                }
+            }
+        }
+    }
+
 private:
     void left_rotate(node *x) {
         if (x != nil && x->right != nil) {
