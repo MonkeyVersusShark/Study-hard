@@ -254,6 +254,7 @@ public:
             p->left = curr->left;
             p->left->prev = p;
         }
+        delete curr;
     }
 
     node *getRoot() const { return root; }
