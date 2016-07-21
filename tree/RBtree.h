@@ -54,6 +54,7 @@ public:
                 }
             }
         }
+        delete nil;
     }
 
 private:
