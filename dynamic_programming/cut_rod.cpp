@@ -1,7 +1,5 @@
 #include <iostream>
 #include <algorithm>
-#include <utility>
-#include <vector>
 using namespace std;
 
 int p[10] = { 1, 5, 8, 9, 10, 17, 17, 20, 24, 30 };
@@ -75,6 +73,7 @@ int *extended_bottom_up_cut_rod(int *p, int n) {
         r[j] = q;
         }
     }
+    delete[] r;
     return s;
 }
 
