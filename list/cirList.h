@@ -157,7 +157,74 @@ public:
         }
     }
 
-    /*
+    void mergeSort() {
+        if (_size > 1) {
+            node *mid = head->next;
+            for (int i = 0; i < _size / 2; i++)
+                mid = mid->next;
+
+            cirList left;
+            cirList right;
+
+            left.head->next = head->next;
+            head->next->prev = left.head;
+            left.head->prev = mid->prev;
+            mid->prev->next = left.head;
+            left._size = _size / 2;
+
+            right.head->next = mid;
+            mid->prev = right.head;
+            right.head->prev = head->prev;
+            head->prev->next = right.head;
+            right._size = _size - _size / 2;
+
+            head->next = head->prev = head;
+
+            left.mergeSort();
+            right.mergeSort();
+
+            node *pleft = left.head->next;
+            node *pright = right.head->next;
+
+            while (pleft != left.head && pright != right.head) {
+                node *temp;
+                if (pleft->data <= pright->data) {
+                    temp = pleft;
+                    pleft = pleft->next;
+                } else {
+                    temp = pright;
+                    pright = pright->next;
+                }
+                head->prev->next = temp;
+                temp->prev = head->prev;
+                head->prev = temp;
+                temp->next = head;
+            }
+
+            while (pleft != left.head) {
+                node *temp = pleft;
+                pleft = pleft->next;
+                head->prev->next = temp;
+                temp->prev = head->prev;
+                head->prev = temp;
+                temp->next = head;
+            }
+
+            while (pright != right.head) {
+                node *temp = pright;
+                pright = pright->next;
+                head->prev->next = temp;
+                temp->prev = head->prev;
+                head->prev = temp;
+                temp->next = head;
+            }
+
+            left.head->next = left.head->prev = left.head;
+            right.head->next = right.head->prev = right.head;
+        }
+    }
+
+
     friend ostream &operator<<(ostream &os, const cirList &x) {
         listPointer p = x.head->next;
         while (p != x.head) {
@@ -166,7 +233,7 @@ public:
         }
         return os;
     }
-     */
+
 };
 
 #endif
